@@ -16,4 +16,4 @@ print('x1, x2 = ', x)
 vanilla = x[0]
 strawberry = x[1]
 max_profit = 2*vanilla + 3*strawberry
-print(max_profit)
+print('max profit = ', max_profit)
