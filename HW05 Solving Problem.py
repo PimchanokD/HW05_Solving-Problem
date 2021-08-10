@@ -5,16 +5,19 @@ Created on Fri Aug  6 16:04:21 2021
 @author: Pimchanok Duang-In 640631125
 """
 
-import numpy as np
-from scipy.linalg import solve
+from scipy.optimize import linprog
+obj = [-2,-3]
 
-A = np.array([[0.5, 0.2], [1., 1.]])
-b = np.array([10., 30.])
-x = (solve(A,b))
-roundx = np.round(x, 0)
-print('x1, x2 = ', roundx)
+A = [[0.5, 0.2],
+     [1., 1.]]
+b = [10, 30]
 
-vanilla = x[0]
-strawberry = x[1]
-max_profit = 2*vanilla + 3*strawberry
-print('max profit = ', round(max_profit))
+bnd = [(0, float('inf')),
+       (0, float('inf'))]
+
+opt = linprog(c = obj, A_ub = A, b_ub = b,
+              bounds=bnd, method='revised simplex')
+print(opt)
+print()
+print('x1, x2 = ', opt.x)
+print('Optimize profit is:', opt.fun*(-1))
